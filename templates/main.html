@@ -51,73 +51,90 @@
       output .span--hidden {
         visibility: hidden;
       }
+
+      img {
+        width: 200px;
+        height: 200px;
+      }
     </style>
   </head>
   <body>
     <div>
       <div><h1>ToothDetection</h1></div>
       <p>Integrating HTML, CSS and Javascript in Flask Web Framework</p>
-      <input
-        id="uploadFile"
-        type="file"
-        accept="image/jpeg, image/png, image/jpg"
-      />
-
-      <output></output>
+      <form method="post" action="/" enctype="multipart/form-data">
+        <dl>
+          <p>
+            <input
+              type="file"
+              name="file"
+              class="form-control"
+              autocomplete="off"
+              required
+            />
+          </p>
+        </dl>
+        <p>
+          <input type="submit" value="Submit" class="btn btn-info" />
+        </p>
+      </form>
+      <div>
+        <img src="{{ url_for('display_image', filename=filename) }}" />
+      </div>
     </div>
   </body>
 
   <!--  Load JavaScript in Flask with html-->
   <script>
-    alert("Page has been loaded successfully");
+    // alert("Page has been loaded successfully");
 
-    let imagesArray = [];
+    // let imagesArray = [];
 
-    window.addEventListener("DOMContentLoaded", (event) => {});
-    const output = document.querySelector("output");
+    // window.addEventListener("DOMContentLoaded", (event) => {});
+    // const output = document.querySelector("output");
 
     // console.log(upload);
 
-    window.onload = function () {
-      const upload = document.getElementById("uploadFile");
-      const output = document.querySelector("output");
-      upload.addEventListener("change", () => {
-        const file = upload.files;
-        imagesArray.push(file[0]);
-        displayImages();
-        console.log(imagesArray);
-      });
+    // window.onload = function () {
+    //   const upload = document.getElementById("uploadFile");
+    //   const output = document.querySelector("output");
+    //   upload.addEventListener("change", () => {
+    //     const file = upload.files;
+    //     imagesArray.push(file[0]);
+    //     displayImages();
+    //     console.log(imagesArray);
+    //   });
 
-      function deleteImage(index) {
-        imagesArray.splice(index, 1);
-        displayImages();
-      }
+    //   function deleteImage(index) {
+    //     imagesArray.splice(index, 1);
+    //     displayImages();
+    //   }
 
-      function displayImages() {
-        let images = "";
-        imagesArray.forEach((image, index) => {
-          images += `<div class="image">
-             <img src="${URL.createObjectURL(image)}" alt="image">
-             <span onClick="hello(${index})">&times;</span>
-           </div>`;
-        });
-        output.innerHTML = images;
-      }
-    };
+    //   function displayImages() {
+    //     let images = "";
+    //     imagesArray.forEach((image, index) => {
+    //       images += `<div class="image">
+    //          <img src="${URL.createObjectURL(image)}" alt="image">
+    //          <span onClick="hello(${index})">&times;</span>
+    //        </div>`;
+    //     });
+    //     output.innerHTML = images;
+    //   }
+    // };
 
-    function displayImages() {
-      let images = "";
-      imagesArray.forEach((image, index) => {
-        images += `<div class="image">
-             <img src="${URL.createObjectURL(image)}" alt="image">
-             <span onClick="hello(${index})">&times;</span>
-           </div>`;
-      });
-      output.innerHTML = images;
-    }
-    function hello(index) {
-      imagesArray.splice(index, 1);
-      displayImages();
-    }
+    // function displayImages() {
+    //   let images = "";
+    //   imagesArray.forEach((image, index) => {
+    //     images += `<div class="image">
+    //          <img src="${URL.createObjectURL(image)}" alt="image">
+    //          <span onClick="hello(${index})">&times;</span>
+    //        </div>`;
+    //   });
+    //   output.innerHTML = images;
+    // }
+    // function hello(index) {
+    //   imagesArray.splice(index, 1);
+    //   displayImages();
+    // }
   </script>
 </html>
