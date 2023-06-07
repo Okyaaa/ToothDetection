@@ -1,43 +1,123 @@
 <!--  how to use css in python_ flask-->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<!--  Load CSS in Flask with html-->
-   <style>
+  <head>
+    <!--  Load CSS in Flask with html-->
+    <style>
       body {
-      background-color: linen;
+        background-color: linen;
       }
       h1 {
-      color: maroon;
-      margin-left: 40px;
+        color: maroon;
+        margin-left: 40px;
       }
-   </style>
- 
-<!--  Load JavaScript in Flask with html-->
-  <script>
-    alert("Page has been loaded successfully")
-
-   window.onload = function(){ 
-      var buttonFile = document.getElementById("buttonFile");
-      var file = document.getElementById("file");
-
-      buttonFile.onclick = function(){
-         document.getElementById("file").click();
+      output {
+        width: 100%;
+        min-height: 150px;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 15px;
+        position: relative;
+        border-radius: 5px;
       }
 
-      var files = document.getElementById('file').files[0]; //I do not know where to put this line
-      alert(files);
-   };	
-  </script>
- 
+      output .image {
+        height: 150px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        position: relative;
+      }
+
+      output .image img {
+        height: 100%;
+        width: 100%;
+      }
+
+      output .image span {
+        position: absolute;
+        top: -4px;
+        right: 4px;
+        cursor: pointer;
+        font-size: 22px;
+        color: white;
+      }
+
+      output .image span:hover {
+        opacity: 0.8;
+      }
+
+      output .span--hidden {
+        visibility: hidden;
+      }
+    </style>
   </head>
   <body>
     <div>
       <div><h1>ToothDetection</h1></div>
-         <p>Integrating HTML, CSS and Javascript in Flask Web Framework</p>
-         <input type="file" id="file" accept=".jpg, .png, .jpeg">
-         <button id="buttonFile">Upload file</button>
-    </div>
+      <p>Integrating HTML, CSS and Javascript in Flask Web Framework</p>
+      <input
+        id="uploadFile"
+        type="file"
+        accept="image/jpeg, image/png, image/jpg"
+      />
 
+      <output></output>
+    </div>
   </body>
+
+  <!--  Load JavaScript in Flask with html-->
+  <script>
+    alert("Page has been loaded successfully");
+
+    let imagesArray = [];
+
+    window.addEventListener("DOMContentLoaded", (event) => {});
+    const output = document.querySelector("output");
+
+    // console.log(upload);
+
+    window.onload = function () {
+      const upload = document.getElementById("uploadFile");
+      const output = document.querySelector("output");
+      upload.addEventListener("change", () => {
+        const file = upload.files;
+        imagesArray.push(file[0]);
+        displayImages();
+        console.log(imagesArray);
+      });
+
+      function deleteImage(index) {
+        imagesArray.splice(index, 1);
+        displayImages();
+      }
+
+      function displayImages() {
+        let images = "";
+        imagesArray.forEach((image, index) => {
+          images += `<div class="image">
+             <img src="${URL.createObjectURL(image)}" alt="image">
+             <span onClick="hello(${index})">&times;</span>
+           </div>`;
+        });
+        output.innerHTML = images;
+      }
+    };
+
+    function displayImages() {
+      let images = "";
+      imagesArray.forEach((image, index) => {
+        images += `<div class="image">
+             <img src="${URL.createObjectURL(image)}" alt="image">
+             <span onClick="hello(${index})">&times;</span>
+           </div>`;
+      });
+      output.innerHTML = images;
+    }
+    function hello(index) {
+      imagesArray.splice(index, 1);
+      displayImages();
+    }
+  </script>
 </html>
