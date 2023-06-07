@@ -1,0 +1,43 @@
+<!--  how to use css in python_ flask-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--  Load CSS in Flask with html-->
+   <style>
+      body {
+      background-color: linen;
+      }
+      h1 {
+      color: maroon;
+      margin-left: 40px;
+      }
+   </style>
+ 
+<!--  Load JavaScript in Flask with html-->
+  <script>
+    alert("Page has been loaded successfully")
+
+   window.onload = function(){ 
+      var buttonFile = document.getElementById("buttonFile");
+      var file = document.getElementById("file");
+
+      buttonFile.onclick = function(){
+         document.getElementById("file").click();
+      }
+
+      var files = document.getElementById('file').files[0]; //I do not know where to put this line
+      alert(files);
+   };	
+  </script>
+ 
+  </head>
+  <body>
+    <div>
+      <div><h1>ToothDetection</h1></div>
+         <p>Integrating HTML, CSS and Javascript in Flask Web Framework</p>
+         <input type="file" id="file" accept=".jpg, .png, .jpeg">
+         <button id="buttonFile">Upload file</button>
+    </div>
+
+  </body>
+</html>
