@@ -51,18 +51,12 @@
       output .span--hidden {
         visibility: hidden;
       }
-
-      img {
-        width: 200px;
-        height: 200px;
-      }
     </style>
   </head>
   <body>
     <div>
-      <div><h1>ToothDetection</h1></div>
-      <p>Integrating HTML, CSS and Javascript in Flask Web Framework</p>
-      <form method="post" action="/" enctype="multipart/form-data">
+      <div><h1>Tooth Detection</h1></div>
+      <form method="post" action="/detect" enctype="multipart/form-data">
         <dl>
           <p>
             <input
@@ -79,62 +73,57 @@
         </p>
       </form>
       <div>
-        <img src="{{ url_for('display_image', filename=filename) }}" />
+
+        <img
+          width="30%"
+          height="30%"
+          src="{{ url_for('static', filename='image0.jpg') }}"
+          alt="User Image"
+          id="HideImg"
+          onerror="hideImg()"
+        />
       </div>
+      <div><h1>Tooth Disease Detection Using CNN</h1></div>
+      <form method="post" action="/detect_disease" enctype="multipart/form-data">
+        <dl>
+          <p>
+            <input
+              type="file"
+              name="file"
+              class="form-control"
+              autocomplete="off"
+              required
+            />
+          </p>
+        </dl>
+        <p>
+          <input type="submit" value="Submit" class="btn btn-info" />
+        </p>
+      </form>
+      <img
+          width="10%"
+          height="10%"
+          src="{{ url_for('static', filename='image_cnn.jpg') }}"
+          alt="User Image"
+          id="HideImg2"
+          onerror="hide_img_text()"
+        />
+        <p id="HideText">Penyakit : {{ value }}</p>
+      </div>
+      <form method="post" action="/delete_dir" enctype="multipart/form-data">
+        <input type="submit" value="Submit" class="btn btn-info" />
+      </form>
     </div>
   </body>
 
   <!--  Load JavaScript in Flask with html-->
   <script>
-    // alert("Page has been loaded successfully");
-
-    // let imagesArray = [];
-
-    // window.addEventListener("DOMContentLoaded", (event) => {});
-    // const output = document.querySelector("output");
-
-    // console.log(upload);
-
-    // window.onload = function () {
-    //   const upload = document.getElementById("uploadFile");
-    //   const output = document.querySelector("output");
-    //   upload.addEventListener("change", () => {
-    //     const file = upload.files;
-    //     imagesArray.push(file[0]);
-    //     displayImages();
-    //     console.log(imagesArray);
-    //   });
-
-    //   function deleteImage(index) {
-    //     imagesArray.splice(index, 1);
-    //     displayImages();
-    //   }
-
-    //   function displayImages() {
-    //     let images = "";
-    //     imagesArray.forEach((image, index) => {
-    //       images += `<div class="image">
-    //          <img src="${URL.createObjectURL(image)}" alt="image">
-    //          <span onClick="hello(${index})">&times;</span>
-    //        </div>`;
-    //     });
-    //     output.innerHTML = images;
-    //   }
-    // };
-
-    // function displayImages() {
-    //   let images = "";
-    //   imagesArray.forEach((image, index) => {
-    //     images += `<div class="image">
-    //          <img src="${URL.createObjectURL(image)}" alt="image">
-    //          <span onClick="hello(${index})">&times;</span>
-    //        </div>`;
-    //   });
-    //   output.innerHTML = images;
-    // }
-    // function hello(index) {
-    //   imagesArray.splice(index, 1);
-    //   displayImages();
-    // }
+    function hideImg() {
+      document.getElementById("HideImg").style.display = "none";
+    }
+    function hide_img_text() {
+      document.getElementById("HideImg2").style.display = "none";
+      document.getElementById("HideText").style.display = "none";
+    }
   </script>
 </html>
